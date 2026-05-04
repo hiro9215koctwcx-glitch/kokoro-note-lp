@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>こころノート — 寝る前5分で、心の整理。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #faf8f5;
+      --white: #ffffff;
+      --green: #7d9b76;
+      --green-dark: #5f7859;
+      --green-soft: rgba(125, 155, 118, 0.12);
+      --text: #3a3935;
+      --text-muted: #6b695f;
+      --night-top: #2c3550;
+      --night-mid: #3d4a6b;
+      --night-bottom: #5a6280;
+      --star: rgba(255, 248, 220, 0.85);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--cream);
+    }
+
+    .inner {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(125, 155, 118, 0.15);
+    }
+    .site-header__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 3.5rem;
+      gap: 1rem;
+    }
+    .logo {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn--primary {
+      background: var(--green);
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(125, 155, 118, 0.35);
+    }
+    .btn--primary:hover {
+      background: var(--green-dark);
+      box-shadow: 0 6px 18px rgba(125, 155, 118, 0.4);
+    }
+    .btn--lg {
+      padding: 0.85rem 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 2.5rem 0 3.5rem;
+      background: linear-gradient(165deg, var(--night-top) 0%, var(--night-mid) 45%, var(--night-bottom) 100%);
+      color: var(--cream);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, var(--star), transparent),
+        radial-gradient(1.5px 1.5px at 25% 55%, var(--star), transparent),
+        radial-gradient(1.5px 1.5px at 40% 15%, var(--star), transparent),
+        radial-gradient(2px 2px at 55% 70%, var(--star), transparent),
+        radial-gradient(1px 1px at 70% 30%, var(--star), transparent),
+        radial-gradient(1.5px 1.5px at 85% 45%, var(--star), transparent),
+        radial-gradient(2px 2px at 92% 12%, var(--star), transparent),
+        radial-gradient(1px 1px at 15% 80%, var(--star), transparent),
+        radial-gradient(1.5px 1.5px at 65% 88%, var(--star), transparent);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .hero__moon {
+      position: absolute;
+      top: 1.5rem;
+      right: 8%;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff9e6, #e8dcbc 55%, #c9b896);
+      box-shadow: 0 0 40px rgba(255, 248, 220, 0.45), 0 0 80px rgba(255, 230, 180, 0.2);
+      pointer-events: none;
+    }
+    .hero .inner { position: relative; z-index: 1; }
+    .hero__title {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: clamp(1.55rem, 5.5vw, 2.35rem);
+      line-height: 1.35;
+      margin: 0 0 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .hero__sub {
+      margin: 0 0 1.75rem;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: rgba(250, 248, 245, 0.88);
+      max-width: 26em;
+    }
+    .hero__actions { margin-bottom: 0.75rem; }
+    .hero__note {
+      margin: 0;
+      font-size: 0.8rem;
+      color: rgba(250, 248, 245, 0.65);
+    }
+
+    /* Sections */
+    section {
+      padding: 2.75rem 0;
+    }
+    section.alt {
+      background: var(--white);
+    }
+    .section-title {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: clamp(1.25rem, 4vw, 1.55rem);
+      text-align: center;
+      margin: 0 0 1.5rem;
+      line-height: 1.45;
+    }
+    .section-lead {
+      max-width: 36em;
+      margin: 0 auto 1.75rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Bubbles */
+    .bubble-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      max-width: 28rem;
+      margin: 0 auto;
+    }
+    .bubble {
+      position: relative;
+      padding: 0.9rem 1.1rem;
+      border-radius: 1.1rem;
+      background: var(--white);
+      box-shadow: 0 4px 20px rgba(60, 55, 45, 0.06);
+      border: 1px solid rgba(125, 155, 118, 0.12);
+      font-size: 0.9rem;
+    }
+    .bubble:nth-child(odd) { margin-right: 1.5rem; align-self: flex-start; }
+    .bubble:nth-child(even) { margin-left: 1.5rem; align-self: flex-end; }
+
+    .points {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem auto 0;
+      max-width: 22rem;
+    }
+    .points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.65rem;
+      font-weight: 500;
+    }
+    .points li::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      margin-top: 0.55rem;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+
+    /* Chat demo */
+    .chat {
+      max-width: 22rem;
+      margin: 1.5rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .chat__row { display: flex; }
+    .chat__row--user { justify-content: flex-end; }
+    .chat__msg {
+      max-width: 92%;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+    .chat__msg--ai {
+      background: var(--white);
+      border: 1px solid rgba(125, 155, 118, 0.2);
+      border-bottom-left-radius: 0.25rem;
+    }
+    .chat__msg--user {
+      background: var(--green-soft);
+      color: var(--text);
+      border-bottom-right-radius: 0.25rem;
+    }
+    .chat__label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+      padding-left: 0.15rem;
+    }
+
+    /* Feature cards */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1.15rem 1.2rem;
+      border: 1px solid rgba(125, 155, 118, 0.15);
+      box-shadow: 0 4px 16px rgba(60, 55, 45, 0.04);
+    }
+    .card__icon { font-size: 1.35rem; margin-bottom: 0.35rem; }
+    .card__title { font-weight: 700; font-size: 0.95rem; margin: 0 0 0.35rem; }
+    .card__text { margin: 0; font-size: 0.88rem; color: var(--text-muted); }
+
+    /* Steps */
+    .steps {
+      counter-reset: step;
+      max-width: 32rem;
+      margin: 0 auto;
+    }
+    .step {
+      position: relative;
+      padding-left: 3.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step__title { font-weight: 700; margin: 0 0 0.25rem; }
+    .step__desc { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+
+    /* Pricing */
+    .pricing {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .plan {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1.35rem 1.25rem;
+      border: 1px solid rgba(125, 155, 118, 0.2);
+    }
+    .plan--highlight {
+      border-color: var(--green);
+      box-shadow: 0 8px 28px rgba(125, 155, 118, 0.18);
+    }
+    .plan__name { font-family: "Noto Serif JP", serif; font-weight: 700; font-size: 1rem; margin: 0 0 0.35rem; }
+    .plan__price { font-size: 1.35rem; font-weight: 700; color: var(--green-dark); margin: 0 0 0.75rem; }
+    .plan__sub { font-size: 0.8rem; color: var(--text-muted); margin: -0.5rem 0 0.75rem; }
+    .plan ul { margin: 0; padding-left: 1.1rem; font-size: 0.88rem; color: var(--text-muted); }
+    .plan li { margin-bottom: 0.35rem; }
+
+    /* FAQ */
+    .faq { max-width: 36rem; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid rgba(125, 155, 118, 0.2);
+    }
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      padding: 1rem 0;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      color: var(--text);
+    }
+    .faq-q span:first-child { flex: 1; }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 1.25rem;
+      height: 1.25rem;
+      position: relative;
+      margin-top: 0.1rem;
+    }
+    .faq-icon::before,
+    .faq-icon::after {
+      content: "";
+      position: absolute;
+      background: var(--green);
+      border-radius: 1px;
+      transition: transform 0.2s ease;
+    }
+    .faq-icon::before { width: 12px; height: 2px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-icon::after { width: 2px; height: 12px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-item.is-open .faq-icon::after { transform: translate(-50%, -50%) scaleY(0); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-a__inner {
+      padding: 0 0 1rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 3rem 0;
+      background: linear-gradient(180deg, var(--green-soft) 0%, var(--cream) 100%);
+    }
+    .final-cta .section-title { margin-bottom: 0.75rem; }
+    .final-cta .section-lead { margin-bottom: 1.5rem; }
+    .final-cta .hero__note { color: var(--text-muted); }
+
+    /* Footer */
+    .site-footer {
+      padding: 1.5rem 0 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(125, 155, 118, 0.15);
+    }
+    .site-footer a {
+      color: var(--green-dark);
+      margin: 0 0.65rem;
+    }
+
+    body .center-text { text-align: center; }
+    .prose-muted { color: var(--text-muted); font-size: 0.95rem; line-height: 1.9; }
+
+    @media (min-width: 640px) {
+      section { padding: 3.5rem 0; }
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .pricing { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+      .bubble-list { max-width: 34rem; }
+      .hero__moon { width: 5rem; height: 5rem; top: 2rem; }
+    }
+
+    @media (min-width: 900px) {
+      .hero { padding: 3.5rem 0 4.5rem; }
+      .inner { padding: 0 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="inner site-header__row">
+      <a class="logo" href="#">こころノート</a>
+      <a class="btn btn--primary" href="https://kokoro-note-umber.vercel.app/" target="_blank" rel="noopener noreferrer">無料で試す</a>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__moon" aria-hidden="true"></div>
+    <div class="inner">
+      <h1 id="hero-title" class="hero__title">寝る前5分で、心の整理。</h1>
+      <p class="hero__sub">
+        分析も記録も必要ありません。<br />
+        ただ今日のことを話すだけ。<br />
+        でも、AIはあなたのことを覚えている。<br />
+        本当の友人のように話しかけられる。
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="https://kokoro-note-umber.vercel.app/" target="_blank" rel="noopener noreferrer">7日間無料で試してみる</a>
+      </div>
+      <p class="hero__note">登録不要・クレカ不要・音声で話すだけ</p>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="sec-night">
+    <div class="inner">
+      <h2 id="sec-night" class="section-title">こんな夜、ありませんか？</h2>
+      <div class="bubble-list">
+        <div class="bubble">今日もモヤモヤしたまま終わった…</div>
+        <div class="bubble">誰かに話したいけど、迷惑かけたくない</div>
+        <div class="bubble">日記を書こうとしたけど、続かない</div>
+        <div class="bubble">頭の中がうるさくて、眠れない</div>
+        <div class="bubble">自分の気持ちが、うまく言葉にできない</div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sec-no-analyze">
+    <div class="inner center-text">
+      <h2 id="sec-no-analyze" class="section-title">こころノートは、分析しません。</h2>
+      <p class="prose-muted" style="max-width: 28em; margin: 0 auto 1rem;">
+        データで自分を管理したいわけじゃない。<br />
+        ただ、誰かに今日のことを聞いてほしい。<br />
+        そんなシンプルな気持ちに寄り添うために<br />
+        こころノートは作られました。
+      </p>
+      <ul class="points" style="text-align: left;">
+        <li>評価しない</li>
+        <li>記録を強制しない</li>
+        <li>ただ、話を聞く</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="sec-memory">
+    <div class="inner">
+      <h2 id="sec-memory" class="section-title">でも、AIはあなたのことを覚えている。</h2>
+      <p class="section-lead">
+        昨日話したこと、ちゃんと覚えています。<br />
+        今日も、昨日の続きから話せます。<br />
+        本当の友人のように、あなたに話しかけます。
+      </p>
+      <div class="chat" role="presentation">
+        <div class="chat__row">
+          <div style="flex:1;">
+            <div class="chat__label">AI</div>
+            <div class="chat__msg chat__msg--ai">昨日、仕事で疲れてたって言ってたね。今日はどうだった？</div>
+          </div>
+        </div>
+        <div class="chat__row chat__row--user">
+          <div>
+            <div class="chat__label" style="text-align:right;">あなた</div>
+            <div class="chat__msg chat__msg--user">少し楽になったかな</div>
+          </div>
+        </div>
+        <div class="chat__row">
+          <div style="flex:1;">
+            <div class="chat__label">AI</div>
+            <div class="chat__msg chat__msg--ai">それは良かった😊 何かあったの？</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sec-voice">
+    <div class="inner center-text">
+      <h2 id="sec-voice" class="section-title">声で話して、声で返ってくる。</h2>
+      <p class="prose-muted" style="max-width: 28em; margin: 0 auto 0.25rem;">
+        文字を打つ必要はありません。<br />
+        話しかけると、AIが声で答えてくれます。<br />
+        まるで、そこに誰かがいるような体験。
+      </p>
+      <div class="cards">
+        <div class="card">
+          <div class="card__icon" aria-hidden="true">🎤</div>
+          <h3 class="card__title">音声入力</h3>
+          <p class="card__text">マイクボタンを押して話すだけ</p>
+        </div>
+        <div class="card">
+          <div class="card__icon" aria-hidden="true">🔊</div>
+          <h3 class="card__title">音声で返答</h3>
+          <p class="card__text">AIが声でやさしく答えてくれる</p>
+        </div>
+        <div class="card">
+          <div class="card__icon" aria-hidden="true">🧠</div>
+          <h3 class="card__title">翌日も覚えている</h3>
+          <p class="card__text">続けるほど、あなたのことをわかってくれる</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="sec-steps">
+    <div class="inner">
+      <h2 id="sec-steps" class="section-title">使い方（3ステップ）</h2>
+      <div class="steps">
+        <div class="step">
+          <p class="step__title">STEP1：メールアドレスで登録（30秒）</p>
+        </div>
+        <div class="step">
+          <p class="step__title">STEP2：寝る前に話しかける（5分）</p>
+        </div>
+        <div class="step">
+          <p class="step__title">STEP3：気持ちがすっきり整理される</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sec-price">
+    <div class="inner">
+      <h2 id="sec-price" class="section-title">料金プラン</h2>
+      <div class="pricing">
+        <div class="plan plan--highlight">
+          <p class="plan__name">7日間無料トライアル</p>
+          <p class="plan__price">0円</p>
+          <ul>
+            <li>全機能使い放題</li>
+            <li>音声入力・音声返答</li>
+            <li>記憶機能</li>
+            <li>クレカ不要</li>
+          </ul>
+        </div>
+        <div class="plan">
+          <p class="plan__name">ライトプラン</p>
+          <p class="plan__price">月額800円</p>
+          <p class="plan__sub">年額6,400円</p>
+          <ul>
+            <li>10回/日のAI会話</li>
+            <li>音声入力・音声返答</li>
+            <li>記憶機能</li>
+          </ul>
+        </div>
+        <div class="plan">
+          <p class="plan__name">スタンダードプラン</p>
+          <p class="plan__price">月額1,980円</p>
+          <p class="plan__sub">年額15,800円</p>
+          <ul>
+            <li>30回/日のAI会話</li>
+            <li>音声入力・音声返答</li>
+            <li>記憶機能</li>
+            <li>週次振り返り（近日公開）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="sec-faq">
+    <div class="inner">
+      <h2 id="sec-faq" class="section-title">よくある質問</h2>
+      <div class="faq">
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false">
+            <span>Q：7日間の無料期間後、自動で課金されますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a__inner">A：されません。無料期間終了後は自動的に無料プランに移行します。有料プランへの移行はご自身で行っていただきます。</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false">
+            <span>Q：解約はいつでもできますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a__inner">A：はい、いつでも解約できます。</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false">
+            <span>Q：音声入力は必須ですか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a__inner">A：いいえ、テキスト入力でも使えます。</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false">
+            <span>Q：スマホとPCどちらで使えますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a__inner">A：どちらでもお使いいただけます。アプリのダウンロードは不要です。</div></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false">
+            <span>Q：話した内容は他の人に見られますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a__inner">A：見られません。会話内容は暗号化して保存されます。</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta" aria-labelledby="sec-last">
+    <div class="inner">
+      <h2 id="sec-last" class="section-title">今夜、試してみませんか？</h2>
+      <p class="section-lead">
+        クレジットカード不要。<br />
+        メールアドレスだけで、今すぐ始められます。
+      </p>
+      <a class="btn btn--primary btn--lg" href="https://kokoro-note-umber.vercel.app/" target="_blank" rel="noopener noreferrer">無料で始める</a>
+      <p class="hero__note" style="margin-top:1rem;">7日間無料・いつでも解約可能</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <p style="margin:0 0 0.65rem;">©2026 こころノート</p>
+      <nav aria-label="フッター">
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">利用規約</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      document.querySelectorAll(".faq-q").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var item = btn.closest(".faq-item");
+          var panel = item.querySelector(".faq-a");
+          var inner = panel.querySelector(".faq-a__inner");
+          var open = item.classList.toggle("is-open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          panel.style.maxHeight = open ? inner.scrollHeight + "px" : "0";
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
