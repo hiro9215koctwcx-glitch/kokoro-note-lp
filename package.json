@@ -1,0 +1,16 @@
+{
+  "name": "kokoro-note-lp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "vercel-build": "echo ok"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.14",
+    "micro": "^10.0.1",
+    "stripe": "^17.7.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
