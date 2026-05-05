@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>お支払いが完了しました — こころノート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --cream: #faf8f5; --green: #7d9b76; --text: #3a3935; --muted: #6b695f; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Noto Sans JP", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      padding: 1.25rem;
+    }
+    .box {
+      max-width: 26rem;
+      text-align: center;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid rgba(125, 155, 118, 0.2);
+    }
+    h1 {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.25rem;
+      margin: 0 0 0.75rem;
+    }
+    p { margin: 0 0 1rem; color: var(--muted); font-size: 0.93rem; line-height: 1.7; }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.2rem;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>お支払いが完了しました</h1>
+    <p>ご登録ありがとうございます。サブスクリプションの反映には数秒かかる場合があります。</p>
+    <p><a class="btn" href="/">サイトに戻る</a></p>
+  </div>
+</body>
+</html>

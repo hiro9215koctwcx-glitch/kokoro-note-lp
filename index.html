@@ -87,6 +87,122 @@
       padding: 0.85rem 1.5rem;
       font-size: 0.95rem;
     }
+    .btn--ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(125, 155, 118, 0.45);
+      box-shadow: none;
+    }
+    .btn--ghost:hover {
+      background: var(--green-soft);
+      color: var(--text);
+      box-shadow: none;
+    }
+    .btn--sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.8125rem;
+    }
+
+    .site-header__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 0;
+    }
+    .auth-email {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      max-width: 10rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Auth dialog */
+    .auth-dialog {
+      max-width: 22rem;
+      width: calc(100% - 2rem);
+      padding: 0;
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 14px 50px rgba(45, 50, 40, 0.18);
+    }
+    .auth-dialog::backdrop {
+      background: rgba(35, 38, 52, 0.42);
+    }
+    .auth-dialog__panel {
+      padding: 1.35rem 1.25rem 1.5rem;
+    }
+    .auth-dialog__head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .auth-dialog__head #auth-form-title {
+      margin: 0;
+      flex: 1;
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.08rem;
+    }
+    .auth-dialog__close {
+      flex-shrink: 0;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.15rem 0.25rem;
+    }
+    .auth-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 0.65rem;
+    }
+    .auth-field label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .auth-field input {
+      border: 1px solid rgba(125, 155, 118, 0.35);
+      border-radius: 0.5rem;
+      padding: 0.55rem 0.65rem;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+    .auth-links {
+      margin: 0.35rem 0 0;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    .auth-links button {
+      background: none;
+      border: none;
+      color: var(--green-dark);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: inherit;
+      padding: 0;
+    }
+    #auth-error {
+      color: #a33;
+      font-size: 0.82rem;
+      margin: 0 0 0.75rem;
+    }
+
+    .pricing-auth-hint {
+      margin: -0.5rem 0 1.25rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      padding-inline: 0.5rem;
+    }
 
     /* Hero — realistic night sky */
     .hero {
@@ -355,6 +471,12 @@
       .hero .inner {
         padding-inline-end: min(52%, clamp(10rem, 26vw + 5rem, 15rem));
       }
+    }
+
+    button.plan__btn {
+      appearance: none;
+      font-family: inherit;
+      line-height: 1.4;
     }
 
     /* Sections */
@@ -690,7 +812,20 @@
   <header class="site-header">
     <div class="inner site-header__row">
       <a class="logo" href="#">こころノート</a>
-      <a class="btn btn--primary" href="https://kokoro-note-umber.vercel.app/" target="_blank" rel="noopener noreferrer">無料で試す</a>
+      <div class="site-header__actions">
+        <div id="auth-bar-guest">
+          <button type="button" class="btn btn--ghost btn--sm" id="open-auth">
+            ログイン
+          </button>
+        </div>
+        <div id="auth-bar-user" hidden>
+          <span class="auth-email" aria-live="polite"></span>
+          <button type="button" class="btn btn--ghost btn--sm" id="sign-out-btn">
+            ログアウト
+          </button>
+        </div>
+        <a class="btn btn--primary" href="https://kokoro-note-umber.vercel.app/" target="_blank" rel="noopener noreferrer">無料で試す</a>
+      </div>
     </div>
   </header>
 
@@ -837,6 +972,9 @@
   <section aria-labelledby="sec-price">
     <div class="inner">
       <h2 id="sec-price" class="section-title">料金プラン</h2>
+      <p class="pricing-auth-hint">
+        各プランはボタンからアプリにお進みください。
+      </p>
       <div class="pricing">
         <div class="plan plan--highlight">
           <p class="plan__name">7日間無料トライアル</p>
@@ -847,6 +985,13 @@
             <li>記憶機能</li>
             <li>クレカ不要</li>
           </ul>
+          <a
+            class="btn btn--primary"
+            href="https://kokoro-note-umber.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="width: 100%; margin-top: 1rem;"
+            >無料で始める</a>
         </div>
         <div class="plan">
           <span class="plan__badge">年間 10%OFF</span>
@@ -859,8 +1004,18 @@
             <li>記憶機能</li>
           </ul>
           <div class="plan__actions">
-            <a class="plan__btn plan__btn--outline" href="#">月額プランで始める</a>
-            <a class="plan__btn plan__btn--filled" href="#">年間プランで始める</a>
+            <a
+              class="plan__btn plan__btn--outline"
+              href="https://kokoro-note-umber.vercel.app/?plan=light_monthly"
+              target="_blank"
+              rel="noopener noreferrer"
+              >月額プランで始める</a>
+            <a
+              class="plan__btn plan__btn--filled"
+              href="https://kokoro-note-umber.vercel.app/?plan=light_yearly"
+              target="_blank"
+              rel="noopener noreferrer"
+              >年間プランで始める</a>
           </div>
         </div>
         <div class="plan">
@@ -875,8 +1030,18 @@
             <li>週次振り返り（近日公開）</li>
           </ul>
           <div class="plan__actions">
-            <a class="plan__btn plan__btn--outline" href="#">月額プランで始める</a>
-            <a class="plan__btn plan__btn--filled" href="#">年間プランで始める</a>
+            <a
+              class="plan__btn plan__btn--outline"
+              href="https://kokoro-note-umber.vercel.app/?plan=standard_monthly"
+              target="_blank"
+              rel="noopener noreferrer"
+              >月額プランで始める</a>
+            <a
+              class="plan__btn plan__btn--filled"
+              href="https://kokoro-note-umber.vercel.app/?plan=standard_yearly"
+              target="_blank"
+              rel="noopener noreferrer"
+              >年間プランで始める</a>
           </div>
         </div>
       </div>
@@ -948,6 +1113,49 @@
     </div>
   </footer>
 
+  <dialog id="auth-dialog" class="auth-dialog" aria-labelledby="auth-form-title">
+    <div class="auth-dialog__panel">
+      <div class="auth-dialog__head">
+        <h3 id="auth-form-title">ログイン</h3>
+        <button type="button" class="auth-dialog__close" id="auth-dialog-close" aria-label="閉じる">
+          ×
+        </button>
+      </div>
+      <p id="auth-error" class="auth-error-msg" hidden></p>
+      <form id="auth-form" autocomplete="on">
+        <div class="auth-field">
+          <label for="auth-email-input">メールアドレス</label>
+          <input
+            id="auth-email-input"
+            type="email"
+            name="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+        <div class="auth-field">
+          <label for="auth-pass-input">パスワード</label>
+          <input
+            id="auth-pass-input"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            minlength="6"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%" id="auth-submit-btn">
+          ログイン
+        </button>
+      </form>
+      <p class="auth-links">
+        <button type="button" id="auth-mode-toggle" data-next="signup">
+          アカウントがない場合は新規作成
+        </button>
+      </p>
+    </div>
+  </dialog>
+
   <script>
     (function initHeroStars() {
       var host = document.getElementById("hero-stars");
@@ -987,5 +1195,6 @@
       });
     })();
   </script>
+  <script type="module" src="./js/checkout.js"></script>
 </body>
 </html>
