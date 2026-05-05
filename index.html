@@ -519,15 +519,80 @@
       padding: 1.35rem 1.25rem;
       border: 1px solid rgba(125, 155, 118, 0.2);
     }
+    .pricing .plan:not(.plan--highlight) {
+      position: relative;
+      padding-inline-end: 8rem;
+    }
     .plan--highlight {
       border-color: var(--green);
       box-shadow: 0 8px 28px rgba(125, 155, 118, 0.18);
     }
+    .plan__badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: var(--green);
+      color: var(--white);
+      border-radius: 999px;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      font-weight: 600;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
     .plan__name { font-family: "Noto Serif JP", serif; font-weight: 700; font-size: 1rem; margin: 0 0 0.35rem; }
-    .plan__price { font-size: 1.35rem; font-weight: 700; color: var(--green-dark); margin: 0 0 0.75rem; }
-    .plan__sub { font-size: 0.8rem; color: var(--text-muted); margin: -0.5rem 0 0.75rem; }
+    .plan__price { font-size: 1.35rem; font-weight: 700; color: var(--green-dark); margin: 0 0 0.25rem; }
+    .plan:not(:has(.plan__annual)) .plan__price {
+      margin-bottom: 0.75rem;
+    }
+    .plan__annual {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0 0 0.75rem;
+      line-height: 1.45;
+    }
     .plan ul { margin: 0; padding-left: 1.1rem; font-size: 0.88rem; color: var(--text-muted); }
     .plan li { margin-bottom: 0.35rem; }
+
+    .plan__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .plan__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      font-family: inherit;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .plan__btn--outline {
+      background: transparent;
+      border-color: var(--green);
+      color: var(--green);
+    }
+    .plan__btn--outline:hover {
+      background: var(--green-soft);
+    }
+    .plan__btn--filled {
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--white);
+    }
+    .plan__btn--filled:hover {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+    }
 
     /* FAQ */
     .faq { max-width: 36rem; margin: 0 auto; }
@@ -784,25 +849,35 @@
           </ul>
         </div>
         <div class="plan">
+          <span class="plan__badge">年間 10%OFF</span>
           <p class="plan__name">ライトプラン</p>
           <p class="plan__price">月額800円</p>
-          <p class="plan__sub">年額6,400円</p>
+          <p class="plan__annual">年額6,400円（月あたり約720円）</p>
           <ul>
             <li>10回/日のAI会話</li>
             <li>音声入力・音声返答</li>
             <li>記憶機能</li>
           </ul>
+          <div class="plan__actions">
+            <a class="plan__btn plan__btn--outline" href="#">月額プランで始める</a>
+            <a class="plan__btn plan__btn--filled" href="#">年間プランで始める</a>
+          </div>
         </div>
         <div class="plan">
+          <span class="plan__badge">年間 10%OFF</span>
           <p class="plan__name">スタンダードプラン</p>
           <p class="plan__price">月額1,980円</p>
-          <p class="plan__sub">年額15,800円</p>
+          <p class="plan__annual">年額15,840円（月あたり約1,782円）</p>
           <ul>
             <li>30回/日のAI会話</li>
             <li>音声入力・音声返答</li>
             <li>記憶機能</li>
             <li>週次振り返り（近日公開）</li>
           </ul>
+          <div class="plan__actions">
+            <a class="plan__btn plan__btn--outline" href="#">月額プランで始める</a>
+            <a class="plan__btn plan__btn--filled" href="#">年間プランで始める</a>
+          </div>
         </div>
       </div>
     </div>
