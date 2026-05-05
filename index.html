@@ -83,6 +83,18 @@
       background: var(--green-dark);
       box-shadow: 0 6px 18px rgba(125, 155, 118, 0.4);
     }
+    .btn--outline-green {
+      background: transparent;
+      border: 1px solid var(--green);
+      color: var(--green);
+      box-shadow: none;
+    }
+    .btn--outline-green:hover {
+      background: var(--green-soft);
+      border-color: var(--green-dark);
+      color: var(--green-dark);
+      box-shadow: none;
+    }
     .btn--lg {
       padding: 0.85rem 1.5rem;
       font-size: 0.95rem;
@@ -814,9 +826,12 @@
       <a class="logo" href="#">こころノート</a>
       <div class="site-header__actions">
         <div id="auth-bar-guest">
-          <button type="button" class="btn btn--ghost btn--sm" id="open-auth">
-            ログイン
-          </button>
+          <a
+            class="btn btn--outline-green"
+            href="https://kokoro-note-umber.vercel.app/?mode=login"
+            target="_blank"
+            rel="noopener noreferrer"
+            >ログイン</a>
         </div>
         <div id="auth-bar-user" hidden>
           <span class="auth-email" aria-live="polite"></span>
