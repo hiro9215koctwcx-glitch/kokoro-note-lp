@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>プライバシーポリシー — こころノート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #faf8f5;
+      --white: #ffffff;
+      --green: #7d9b76;
+      --green-dark: #5f7859;
+      --green-soft: rgba(125, 155, 118, 0.12);
+      --text: #3a3935;
+      --text-muted: #6b695f;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--cream);
+    }
+    .inner {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(125, 155, 118, 0.15);
+    }
+    .site-header__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 3.5rem;
+      gap: 1rem;
+    }
+    .logo {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .legal-main {
+      padding: 2.5rem 0 3.5rem;
+    }
+    .legal-main h1 {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin: 0 0 1.75rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .legal-block {
+      background: var(--white);
+      border-radius: 1rem;
+      border: 1px solid rgba(125, 155, 118, 0.2);
+      padding: 1.5rem 1.35rem;
+      max-width: 40rem;
+      margin: 0 auto;
+    }
+    .legal-block section + section {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(125, 155, 118, 0.15);
+    }
+    .legal-block h2 {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0 0 0.5rem;
+      color: var(--text);
+    }
+    .legal-block p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+    .legal-block a {
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+    .site-footer {
+      padding: 1.5rem 0 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(125, 155, 118, 0.15);
+    }
+    .site-footer a {
+      color: var(--green-dark);
+      margin: 0 0.65rem;
+    }
+    @media (min-width: 900px) {
+      .inner { padding: 0 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner site-header__row">
+      <a class="logo" href="/">こころノート</a>
+    </div>
+  </header>
+
+  <main class="legal-main">
+    <div class="inner">
+      <h1>プライバシーポリシー</h1>
+      <article class="legal-block">
+        <section>
+          <h2>収集する情報</h2>
+          <p>メールアドレス、会話内容を収集します。</p>
+        </section>
+        <section>
+          <h2>利用目的</h2>
+          <p>サービス提供および品質改善のために利用します。</p>
+        </section>
+        <section>
+          <h2>第三者提供</h2>
+          <p>第三者への提供は行いません。</p>
+        </section>
+        <section>
+          <h2>お問い合わせ先</h2>
+          <p>
+            <a href="https://forms.gle/7t5ba6GuX1RXg4vh8" target="_blank" rel="noopener noreferrer">サイトのお問い合わせフォーム</a>へご連絡ください。
+          </p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <p style="margin:0 0 0.65rem;">©2026 こころノート</p>
+      <nav aria-label="フッター">
+        <a href="/privacy">プライバシーポリシー</a>
+        <a href="/terms">利用規約</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
