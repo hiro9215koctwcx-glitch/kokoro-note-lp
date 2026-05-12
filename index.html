@@ -808,6 +808,64 @@
       line-height: 1.7;
     }
 
+    /* App comparison — 他のアプリとの違い */
+    .compare-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 0.25rem;
+    }
+    .compare-table {
+      width: 100%;
+      min-width: 280px;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      table-layout: fixed;
+    }
+    .compare-table th,
+    .compare-table td {
+      padding: 0.75rem 0.85rem;
+      border: 1px solid rgba(125, 155, 118, 0.25);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .compare-table thead th {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      background: rgba(125, 155, 118, 0.08);
+      color: var(--text);
+      text-align: center;
+      width: 50%;
+    }
+    .compare-table thead th.compare-table__kokoro {
+      background: var(--green-soft);
+      color: var(--green-dark);
+      box-shadow: inset 0 0 0 1px rgba(125, 155, 118, 0.25);
+    }
+    .compare-table tbody td:first-child {
+      color: var(--text-muted);
+      background: var(--cream);
+      width: 50%;
+    }
+    .compare-table tbody td:last-child {
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-weight: 600;
+      width: 50%;
+    }
+    @media (max-width: 419px) {
+      .compare-table th,
+      .compare-table td {
+        padding: 0.55rem 0.5rem;
+        font-size: 0.8125rem;
+      }
+      .compare-table thead th {
+        font-size: 0.875rem;
+      }
+    }
+
     /* Final CTA */
     .final-cta {
       text-align: center;
@@ -898,10 +956,10 @@
       </div>
     </div>
     <div class="inner">
-      <h1 id="hero-title" class="hero__title">「また同じことで悩んでる…」<br>それ、今夜終わりにできます。</h1>
+      <h1 id="hero-title" class="hero__title">誰にも言えない気持ちを、今夜だけ、ここに置いていきませんか。</h1>
       <p class="hero__sub">
-        頭の中のぐるぐるが、話すだけでスッと整理されます。<br />
-        分析も記録も必要ありません。ただ、今夜のことを話すだけ。
+        うまく話せなくていい。正解を言わなくていい。<br />
+        ただ、今夜のことを話すだけでいい。
       </p>
       <div class="hero__actions">
         <a class="btn btn--primary btn--lg" href="https://kokoro-note-umber.vercel.app/" target="_blank" rel="noopener noreferrer">無料で頭の中を整理する（1分）</a>
@@ -919,6 +977,8 @@
         <div class="bubble">誰にも話せないことが、ずっと溜まってる</div>
         <div class="bubble">寝る前に頭がぐるぐるして、眠れない</div>
         <div class="bubble">自分の気持ちが、うまく言葉にできない</div>
+        <div class="bubble">カウンセリングに行くほどじゃないかも、と思ってしまう</div>
+        <div class="bubble">"大丈夫だよ"と言われても、なんか違う</div>
       </div>
       <div style="text-align:center; margin-top: 2rem;">
         <p style="font-size:14px; margin-bottom:1rem;">そのモヤモヤ、今夜のうちに整理できます。</p>
@@ -931,17 +991,54 @@
     <div class="inner center-text">
       <h2 id="sec-no-analyze" class="section-title">こころノートは、分析しません。</h2>
       <p class="prose-muted" style="max-width: 28em; margin: 0 auto 1rem;">
-        気持ちを整理したいわけじゃない。<br />
-        ただ、誰かに今日のことを聞いてほしい。<br />
-        言語化して、整理して、落ち着きたい。<br />
-        そんなシンプルな気持ちに寄り添うために<br />
-        こころノートは作られました。
+        他のアプリは『改善』しようとします。こころノートは、ただ『受け止め』ます。<br />
+        評価しない。診断しない。アドバイスしない。<br />
+        ただ、今夜のあなたの気持ちを、静かに聞きます。
       </p>
       <ul class="points" style="text-align: left;">
-        <li>評価しない・アドバイスしない</li>
-        <li>ただ、話を聞いて言語化を助ける</li>
-        <li>話すほど、頭が整理されていく</li>
+        <li>無理に前向きにさせません</li>
+        <li>つらい時だけ使ってもOK</li>
+        <li>分析されている感がありません</li>
+        <li>AIだからこそ、気を遣わずに話せます</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="sec-compare-app">
+    <div class="inner">
+      <h2 id="sec-compare-app" class="section-title">他のアプリとの違い</h2>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th scope="col">他のアプリ</th>
+              <th scope="col" class="compare-table__kokoro">こころノート</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>自己分析・記録が中心</td>
+              <td>ただ話を聞いてくれる</td>
+            </tr>
+            <tr>
+              <td>毎日続ける前提</td>
+              <td>つらい時だけでもOK</td>
+            </tr>
+            <tr>
+              <td>テキスト入力のみ</td>
+              <td>声で話して、声で返ってくる</td>
+            </tr>
+            <tr>
+              <td>キャラクターと会話</td>
+              <td>静かに、大人向けに寄り添う</td>
+            </tr>
+            <tr>
+              <td>改善・前向きを促す</td>
+              <td>無理に前向きにしなくていい</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -1064,11 +1161,12 @@
     <div class="inner center-text">
       <h2 id="sec-why-trust" class="section-title">なぜ、このサービスを作ったか。</h2>
       <p class="prose-muted" style="max-width: 28em; margin: 0 auto;">
-        私自身も、夜ひとりで考えすぎて眠れない夜がありました。<br />
-        誰かに話したいけど、迷惑をかけたくない。<br />
-        カウンセリングはハードルが高い。<br />
-        そんな経験から、いつでも話せる場所を作りたいと思いました。<br />
-        AIと音声技術を組み合わせて、ようやく形にできたのが「こころノート」です。
+        ある夜、2時を過ぎても眠れませんでした。<br />
+        頭の中でぐるぐると同じことを繰り返して、<br />
+        誰かに話したいけど、こんな時間に連絡できない。<br />
+        カウンセリングに行くほどじゃないかも、と思ってしまう。<br />
+        その『でも、誰かに聞いてほしい』という気持ち、あなたにも覚えがありませんか？<br />
+        こころノートは、そのひとことから生まれました。
       </p>
     </div>
   </section>
@@ -1230,7 +1328,9 @@
     <div class="inner">
       <h2 id="sec-last" class="section-title">そのままにしなくて、大丈夫です。</h2>
       <p style="font-family:'Noto Serif JP',serif; font-size:1.05rem; line-height:1.9; color:var(--text); margin-bottom:1.5rem;">
-        一人で抱えなくていい。今夜、少し軽くなりませんか。
+        今夜も、ひとりで抱えなくていい。<br />
+        話すだけでいい。うまく言えなくてもいい。<br />
+        ただ、今夜のあなたの気持ちを、ここに置いていってください。
       </p>
       <a class="btn btn--primary btn--lg" href="https://kokoro-note-umber.vercel.app/" target="_blank" rel="noopener noreferrer">無料で気持ちを整理する</a>
       <p class="hero__note" style="margin-top:1rem;">7日間無料・クレカ不要・いつでもやめられる</p>
