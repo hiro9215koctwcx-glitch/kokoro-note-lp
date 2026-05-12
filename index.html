@@ -236,21 +236,25 @@
       margin-top: 0;
     }
 
-    /* Hero — realistic night sky */
+    /* Hero — photo background + night-toned overlay */
     .hero {
       position: relative;
       overflow: hidden;
       padding: 2.5rem 0 3.75rem;
-      background: linear-gradient(180deg, #0a0a2e 0%, #1a1a4e 52%, #2d1b4e 100%);
+      background-color: #1a1a4e;
+      background-image:
+        linear-gradient(180deg, rgba(10, 10, 46, 0.78) 0%, rgba(26, 26, 78, 0.74) 52%, rgba(45, 27, 78, 0.78) 100%),
+        url("/image_8e38f403.png"),
+        url("/image_35e5b878.png");
+      background-position: center center, left center, right center;
+      background-size: cover, 50% 100%, 50% 100%;
+      background-repeat: no-repeat, no-repeat, no-repeat;
       color: #ffffff;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
     }
 
     .hero__sky {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+      display: none;
     }
 
     .hero__milkyway {
@@ -496,6 +500,17 @@
       }
       .hero__cloud {
         animation: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        background-image:
+          linear-gradient(180deg, rgba(10, 10, 46, 0.78) 0%, rgba(26, 26, 78, 0.74) 52%, rgba(45, 27, 78, 0.78) 100%),
+          url("/image_35e5b878.png");
+        background-position: center center, center center;
+        background-size: cover, cover;
+        background-repeat: no-repeat, no-repeat;
       }
     }
 
