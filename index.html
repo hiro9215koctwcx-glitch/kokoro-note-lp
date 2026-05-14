@@ -236,7 +236,7 @@
       margin-top: 0;
     }
 
-    /* Hero — simple navy block (no background images) */
+    /* Hero — inline SVG night sky (moon · stars · city) */
     .hero {
       position: relative;
       overflow: hidden;
@@ -246,9 +246,34 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
     }
 
+    .hero__art {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero__art-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero__art-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(
+        ellipse 78% 92% at 50% 44%,
+        rgba(15, 23, 42, 0.28) 0%,
+        rgba(15, 23, 42, 0.55) 48%,
+        rgba(15, 23, 42, 0.88) 100%
+      );
+    }
+
     .hero .inner {
       position: relative;
-      z-index: 10;
+      z-index: 2;
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     }
     .hero__title {
@@ -286,6 +311,20 @@
     .hero .btn.btn--primary {
       text-shadow: none;
       color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .hero__art-scrim {
+        background: radial-gradient(
+          ellipse 92% 100% at 50% 36%,
+          rgba(15, 23, 42, 0.35) 0%,
+          rgba(15, 23, 42, 0.62) 45%,
+          rgba(15, 23, 42, 0.92) 100%
+        );
+      }
+      .hero {
+        background-color: #0f172a;
+      }
     }
 
     button.plan__btn {
@@ -720,6 +759,104 @@
   </header>
 
   <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__art" aria-hidden="true">
+      <svg
+        class="hero__art-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 520"
+        preserveAspectRatio="xMidYMid slice"
+        focusable="false"
+      >
+        <defs>
+          <linearGradient id="hero-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#050a14" />
+            <stop offset="38%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="#152238" />
+          </linearGradient>
+          <radialGradient id="hero-moon-halo" gradientUnits="userSpaceOnUse" cx="1024" cy="92" r="180">
+            <stop offset="0%" stop-color="#fefce8" stop-opacity="0.42" />
+            <stop offset="35%" stop-color="#c7d2fe" stop-opacity="0.14" />
+            <stop offset="70%" stop-color="#1e3a5f" stop-opacity="0.04" />
+            <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+          </radialGradient>
+          <radialGradient id="hero-moon-disk" cx="38%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#fffef7" />
+            <stop offset="55%" stop-color="#f3e7c8" />
+            <stop offset="100%" stop-color="#d4c49a" />
+          </radialGradient>
+          <linearGradient id="hero-city" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0c1324" />
+            <stop offset="100%" stop-color="#030508" />
+          </linearGradient>
+          <filter id="hero-moon-soft" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <rect width="1200" height="520" fill="url(#hero-sky)" />
+        <!-- うっすら天の川 -->
+        <path
+          d="M0 120 Q220 100 480 130 T960 118 T1200 126 L1200 0 L0 0 Z"
+          fill="#334155"
+          opacity="0.06"
+        />
+        <!-- 星（大小まばら） -->
+        <g fill="#f1f5f9">
+          <circle cx="86" cy="52" r="1.1" opacity="0.85" />
+          <circle cx="142" cy="118" r="0.9" opacity="0.65" />
+          <circle cx="218" cy="74" r="1.4" opacity="0.9" />
+          <circle cx="284" cy="156" r="0.8" opacity="0.55" />
+          <circle cx="356" cy="48" r="1" opacity="0.75" />
+          <circle cx="420" cy="196" r="0.75" opacity="0.5" />
+          <circle cx="512" cy="88" r="1.2" opacity="0.88" />
+          <circle cx="568" cy="142" r="0.85" opacity="0.6" />
+          <circle cx="640" cy="64" r="1" opacity="0.8" />
+          <circle cx="708" cy="178" r="0.9" opacity="0.55" />
+          <circle cx="748" cy="102" r="1.3" opacity="0.92" />
+          <circle cx="820" cy="44" r="0.85" opacity="0.7" />
+          <circle cx="892" cy="168" r="0.8" opacity="0.52" />
+          <circle cx="156" cy="224" r="0.7" opacity="0.45" />
+          <circle cx="968" cy="206" r="0.75" opacity="0.48" />
+        </g>
+        <g fill="#fef9c3" opacity="0.35">
+          <circle cx="312" cy="132" r="0.5" />
+          <circle cx="536" cy="56" r="0.45" />
+          <circle cx="612" cy="190" r="0.5" />
+        </g>
+        <!-- 満月のにじみ（グロー） -->
+        <circle cx="1024" cy="92" r="168" fill="url(#hero-moon-halo)" />
+        <g filter="url(#hero-moon-soft)" opacity="0.55">
+          <circle cx="1024" cy="92" r="92" fill="#fefce8" />
+        </g>
+        <!-- 月本体 -->
+        <circle cx="1024" cy="92" r="64" fill="url(#hero-moon-disk)" stroke="#a89968" stroke-width="0.75" opacity="0.98" />
+        <ellipse cx="1006" cy="78" rx="14" ry="10" fill="#b8a878" opacity="0.12" />
+        <ellipse cx="1044" cy="108" rx="18" ry="12" fill="#9a8b60" opacity="0.1" />
+        <ellipse cx="1012" cy="104" rx="8" ry="6" fill="#a39068" opacity="0.11" />
+        <!-- 街のシルエット -->
+        <path
+          fill="url(#hero-city)"
+          opacity="0.88"
+          d="M0 520 L0 398
+            L24 398 L24 368 L48 368 L48 392 L76 392 L76 344 L108 344 L108 386 L132 386 L132 354
+            L168 354 L168 404 L196 404 L196 328 L236 328 L236 374 L272 374 L272 312 L308 312 L308 386
+            L344 386 L344 352 L392 352 L392 418 L436 418 L436 378 L492 378 L492 438 L548 438 L548 366
+            L604 366 L604 418 L668 418 L668 394 L716 394 L716 428 L764 428 L764 382 L836 382 L836 444
+            L904 444 L904 394 L964 394 L964 434 L1032 434 L1032 368 L1092 368 L1092 418 L1148 418 L1148 388
+            L1188 388 L1188 406 L1200 406 L1200 520 Z"
+        />
+        <!-- 細いウィンドウ灯り -->
+        <g opacity="0.18" fill="#fef3c7">
+          <rect x="248" y="344" width="4" height="6" ry="1" /><rect x="392" y="372" width="4" height="5" ry="1" />
+          <rect x="584" y="398" width="4" height="6" ry="1" /><rect x="744" y="412" width="4" height="5" ry="1" />
+          <rect x="948" y="416" width="4" height="6" ry="1" /><rect x="860" y="412" width="4" height="5" ry="1" />
+        </g>
+      </svg>
+      <div class="hero__art-scrim"></div>
+    </div>
     <div class="inner">
       <h1 id="hero-title" class="hero__title">誰にも言えない気持ちを、今夜だけ、ここに置いていきませんか。</h1>
       <p class="hero__sub">
